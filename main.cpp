@@ -8,8 +8,6 @@
 using HWAddr = uint8_t[6];
 using IPAddr = uint8_t[4];
 
-using InerPDU = std::vector<uint8_t>;
-
 class IP {
 public:
     uint8_t vhl;
