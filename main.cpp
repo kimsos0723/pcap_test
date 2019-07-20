@@ -74,16 +74,22 @@ void print_tcp_data(int tol, int hl, const uint8_t *packet) {
   }
 }
 
-int main() {
+
+int main(int argc, char const *argv[])
+{
+  if(argc != 2 ) {
+    fprintf(stderr, "please input network device name by parameter\n");
+    return -1;
+  }
   pcap_pkthdr *header;
   const uint8_t *frame;
   char err_buf[PCAP_ERRBUF_SIZE];
   pcap_t *handle = nullptr;
   int res = 0;
-
-  handle = pcap_open_live("dum0", 1024, 0, 512, err_buf);
+  char* device_name = (char*)argv[1];
+  handle = pcap_open_live(device_name, 1024, 0, 512, err_buf);
   if (handle == NULL) {
-    fprintf(stderr, "couldn't open device %s: %s\n", "dum0", err_buf);
+    fprintf(stderr, "couldn't open device %s: %s\n", device_name, err_buf);
     return -1;
   }
 
